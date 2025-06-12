@@ -52,6 +52,10 @@ let scores = {
 // Initialize the application
 function init() {
     setupEventListeners();
+    // Initially hide submit and next buttons
+    submitAnswer.style.display = 'none';
+    nextQuestionBtn.style.display = 'none';
+    finishInterviewBtn.style.display = 'none';
 }
 
 // Set up event listeners
@@ -98,6 +102,7 @@ function startInterview() {
     resetScores();
     nextQuestion();
     startInterviewBtn.disabled = true;
+    submitAnswer.style.display = 'block';
     submitAnswer.disabled = false;
     finalAnalysis.classList.add('hidden');
 }
@@ -114,14 +119,15 @@ function nextQuestion() {
         submitAnswer.disabled = false;
         submitAnswer.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Answer';
         nextQuestionBtn.disabled = true;
+        nextQuestionBtn.style.display = 'block';
         
         // Update progress bar
         const progress = ((currentQuestionIndex + 1) / interviewQuestions.length) * 100;
         interviewProgress.style.width = `${progress}%`;
         
         if (currentQuestionIndex === interviewQuestions.length - 1) {
-            nextQuestionBtn.classList.add('hidden');
-            finishInterviewBtn.classList.remove('hidden');
+            nextQuestionBtn.style.display = 'none';
+            finishInterviewBtn.style.display = 'block';
         }
     }
 }
@@ -129,10 +135,18 @@ function nextQuestion() {
 // Finish interview and show final analysis
 async function finishInterview() {
     try {
+        finishInterviewBtn.disabled = true;
+        finishInterviewBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
         const finalAnalysis = await analyzeFinalResults();
         displayFinalAnalysis(finalAnalysis);
+        finishInterviewBtn.innerHTML = '<i class="fas fa-check-circle"></i> Analysis Complete';
     } catch (error) {
         console.error('Error generating final analysis:', error);
+        finishInterviewBtn.innerHTML = '<i class="fas fa-exclamation-circle"></i> Error';
+        setTimeout(() => {
+            finishInterviewBtn.innerHTML = '<i class="fas fa-check-circle"></i> Finish Interview';
+            finishInterviewBtn.disabled = false;
+        }, 2000);
     }
 }
 
