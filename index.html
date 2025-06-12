@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Interview Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-robot"></i> AI Interview Platform</h1>
+            <p>Assess your job readiness through AI-powered interviews</p>
+        </header>
+
+        <main>
+            <div class="interview-container">
+                <div class="progress-bar">
+                    <div class="progress" id="interviewProgress"></div>
+                </div>
+
+                <div class="interview-area">
+                    <div class="question-container">
+                        <div class="question-header">
+                            <span class="question-number" id="questionNumber">Q1</span>
+                            <span class="question-category" id="questionCategory">General</span>
+                        </div>
+                        <p id="currentQuestion" class="question-text">Welcome! Click 'Start Interview' to begin.</p>
+                    </div>
+
+                    <div class="response-area">
+                        <textarea id="textInput" placeholder="Type your answer here..." rows="6"></textarea>
+                        <div class="response-controls">
+                            <button id="submitAnswer" class="submit-btn">
+                                <i class="fas fa-paper-plane"></i> Submit Answer
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="controls">
+                    <button id="startInterview" class="primary-btn">
+                        <i class="fas fa-play"></i> Start Interview
+                    </button>
+                    <button id="nextQuestion" class="primary-btn" disabled>
+                        <i class="fas fa-forward"></i> Next Question
+                    </button>
+                    <button id="finishInterview" class="primary-btn hidden">
+                        <i class="fas fa-check-circle"></i> Finish Interview
+                    </button>
+                </div>
+
+                <div class="analysis-container hidden" id="finalAnalysis">
+                    <h2><i class="fas fa-chart-line"></i> Interview Analysis</h2>
+                    <div class="analysis-results">
+                        <div class="metric">
+                            <h3>Confidence Score</h3>
+                            <div class="score" id="confidenceScore">-</div>
+                        </div>
+                        <div class="metric">
+                            <h3>Technical Knowledge</h3>
+                            <div class="score" id="technicalScore">-</div>
+                        </div>
+                        <div class="metric">
+                            <h3>Communication Skills</h3>
+                            <div class="score" id="communicationScore">-</div>
+                        </div>
+                    </div>
+                    <div class="ai-feedback">
+                        <h3><i class="fas fa-comment-dots"></i> AI Feedback</h3>
+                        <div id="feedbackText" class="feedback-content">-</div>
+                    </div>
+                    <div class="recommendations">
+                        <h3><i class="fas fa-lightbulb"></i> Recommendations</h3>
+                        <div id="recommendationsText" class="recommendations-content">-</div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="config.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
